@@ -73,7 +73,16 @@ app.post('/generate-hair', async (req, res) => {
 });
 
 // Port aus .env oder Standardwert 3000/Render
+const http = require("http");
+
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = http.createServer(app);
+
+// großzügige Limits gegen Timeouts
+server.headersTimeout = 120000;   // 120s Header/Response Timeout
+server.keepAliveTimeout = 75000;  // 75s
+server.requestTimeout = 0;        // kein harter Cutoff auf Request-Ebene
+
+server.listen(port, () => {
   console.log(`✅ Backend läuft auf Port ${port}`);
 });
