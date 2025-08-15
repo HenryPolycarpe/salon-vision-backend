@@ -38,7 +38,7 @@ app.post('/generate-hair', async (req, res) => {
     form.append('model', 'gpt-image-1');            // <-- WICHTIG!
     form.append('prompt', prompt || 'Hair style preview');
     form.append('size', size);
-    form.append('response_format', 'b64_json');     // <-- App kann Base64 direkt decodieren
+    // form.append('response_format', 'b64_json');     // <-- App kann Base64 direkt decodieren (entfernt wegen fehlermeldung)
     form.append('image', imageBuffer, {
       filename: 'source.png',
       contentType: 'image/png',
